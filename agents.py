@@ -56,16 +56,16 @@ class StringAgent:
     
     
 class LLMAgent:
-    def __init__(self):
-        self.tool=LLMTool()
-    
+    def __init__(self, huggingface_api_key):
+        self.tool=LLMTool(huggingface_api_key)
+
     def perform_task(self, question):
         return self.tool.perform_task(question)
 
 
 class MasterAgent:
-    def __init__(self, api_key):
-        self.agents=[CalculatorAgent(), WeatherAgent(api_key), StringAgent(), LLMAgent()]
+    def __init__(self, weather_api_key, huggingface_api_key):
+        self.agents=[CalculatorAgent(), WeatherAgent(weather_api_key), StringAgent(), LLMAgent(huggingface_api_key)]
         
     def perform_task(self, question):
         for agent in self.agents:
